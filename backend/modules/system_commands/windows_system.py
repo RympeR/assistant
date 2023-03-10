@@ -22,6 +22,7 @@ class WindowsSystem:
             get_current_user_home() - get current user home directory
             stop_process_by_name(name) - stop process by name
             stop_system_shutdown() - stop system shutdown
+            get_system_datetime() - get system datetime
     """
     @staticmethod
     def shutdown():
@@ -66,6 +67,11 @@ class WindowsSystem:
     @staticmethod
     def stop_system_shutdown():
         subprocess.call(f'powershell shutdown /a')
+
+    @staticmethod
+    def get_system_datetime():
+        return subprocess.check_output('powershell Get-Date', shell=True).decode('windows-1251')
+
 
 # value = subprocess.run('powershell ls')
 # value = subprocess.call('powershell ls')
