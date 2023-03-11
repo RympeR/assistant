@@ -21,5 +21,18 @@ if not os.path.exists(CUSTOM_COMMANDS_FILE_PATH):
         f.write('')
 
 with open(CUSTOM_COMMANDS_FILE_PATH, 'r') as f:
-    for line in f:
-        CUSTOM_COMMANDS.append(line.strip())
+    for _line in f:
+        CUSTOM_COMMANDS.append(_line.strip())
+
+
+def custom_commands_reinitialization():
+    global CUSTOM_COMMANDS
+    with open(CUSTOM_COMMANDS_FILE_PATH, 'r') as f:
+        for line in f:
+            CUSTOM_COMMANDS.append(line.strip())
+    return CUSTOM_COMMANDS
+
+
+def set_language(language):
+    global USER_LANGUAGE
+    USER_LANGUAGE = language

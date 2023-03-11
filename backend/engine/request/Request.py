@@ -1,23 +1,32 @@
 from typing import Union, List
-from backend.engine.request.Command import Command
+from backend.engine.request.Command import CommandOBJ
 from dataclasses import dataclass
+from backend.engine.settings import set_language
 
 
 @dataclass
-class Request:
-    command: Union[Command, None] = None
+class RequestOBJ:
+    commands: Union[List[CommandOBJ], None] = None
+    language: Union[str, None] = None
     args: Union[List[str], None] = None
     kwargs: Union[dict, None] = None
 
+    def __init__(self, commands: Union[List[CommandOBJ], None] = None, language: Union[str, None] = None,
+                 *args: Union[List[str], None], **kwargs: Union[dict, None]):
+        self.commands = commands
+        self.args = args
+        self.kwargs = kwargs
+        set_language(language)
+
     def __str__(self):
-        return f'Request: {self.command}, args: {self.args}, kwargs: {self.kwargs}'
+        return f'Request: {self.commands}, args: {self.args}, kwargs: {self.kwargs}'
 
     def __repr__(self):
-        return f'Request: {self.command}, args: {self.args}, kwargs: {self.kwargs}'
+        return f'Request: {self.commands}, args: {self.args}, kwargs: {self.kwargs}'
 
     def __bool__(self):
-        return bool(self.command)
+        return bool(self.commands)
 
 
 if __name__ == '__main__':
-    print(Request())
+    print(RequestOBJ())
