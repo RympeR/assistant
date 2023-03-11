@@ -1,4 +1,6 @@
 import requests
+
+from backend.engine.settings import USER_CITY, USER_LANGUAGE, WEATHER_API_TOKEN
 from backend.utils.utils import translate, serializer
 
 
@@ -16,13 +18,12 @@ class WeatherAPI:
         get_weather_description() - get weather description
         get_weather_icon() - get weather icon
     """
-    API_TOKEN = "4619caa912829cb525698f5306d64634"
     BASEURL = "https://api.openweathermap.org/data/2.5/weather?q={city}&appid={token}&units=metric"
-    lang = 'ru'
 
-    def __init__(self, city):
-        self.city = city
-        self.url = self.BASEURL.format(city=self.city, token=self.API_TOKEN)
+    def __init__(self):
+        self.lang = USER_LANGUAGE
+        self.city = USER_CITY
+        self.url = self.BASEURL.format(city=self.city, token=WEATHER_API_TOKEN)
 
     def get_weather(self):
         response = requests.get(self.url)
@@ -82,11 +83,5 @@ class WeatherAPI:
 
 
 if __name__ == '__main__':
-    print(WeatherAPI('Odessa').get_temperature())
-    print(WeatherAPI('Odessa').get_humidity())
-    print(WeatherAPI('Odessa').get_pressure())
-    print(WeatherAPI('Odessa').get_wind_speed())
-    print(WeatherAPI('Odessa').get_wind_deg())
-    print(WeatherAPI('Odessa').get_clouds())
-    print(WeatherAPI('Odessa').get_weather_description())
-    print(WeatherAPI('Odessa').get_weather_icon())
+    print(WeatherAPI().get_temperature())
+    print(WeatherAPI().get_humidity())

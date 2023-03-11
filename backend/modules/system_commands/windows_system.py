@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+from backend.utils.utils import serializer, translate
+
 
 class WindowsSystem:
     """
@@ -23,6 +25,7 @@ class WindowsSystem:
             stop_system_shutdown() - stop system shutdown
             get_system_datetime() - get system datetime
     """
+
     @staticmethod
     def shutdown():
         subprocess.call('powershell shutdown /s')
@@ -68,13 +71,7 @@ class WindowsSystem:
         subprocess.call(f'powershell shutdown /a')
 
     @staticmethod
+    @translate
+    @serializer('datetime')
     def get_system_datetime():
         return subprocess.check_output('powershell Get-Date', shell=True).decode('windows-1251')
-
-
-# value = subprocess.run('powershell ls')
-# value = subprocess.call('powershell ls')
-# proc = subprocess.Popen('powershell ls', stdout=subprocess.PIPE)
-# print(dir(value))
-# print(proc.stdout.read().decode('windows-1251'))
-# print(value.stderr)

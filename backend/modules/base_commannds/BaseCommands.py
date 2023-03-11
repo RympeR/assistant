@@ -1,7 +1,7 @@
 from random import choice
 import pyjokes
-from googletrans import Translator
-from backend.utils.utils import translate
+from backend.utils.utils import translate, serializer
+from backend.engine.settings import USER_LANGUAGE
 
 
 class BaseCommands:
@@ -16,20 +16,21 @@ class BaseCommands:
                     lang: str - language to translate
     """
     coin_choices = ['heads', 'tails']
-    translator = Translator()
-    lang = 'ru'
 
-    def __init__(self, lang: str = 'ru'):
-        self.lang = lang
+    def __init__(self):
+        self.lang = USER_LANGUAGE
 
     @translate
+    @serializer("coin")
     def coin(self):
         return choice(BaseCommands.coin_choices)
 
     @translate
+    @serializer("joke")
     def joke(self):
         return pyjokes.get_joke()
 
     @translate
+    @serializer("translate")
     def translate(self, text: str):
         return text
