@@ -3,6 +3,7 @@ import pyjokes
 from googletrans import Translator
 from backend.utils.utils import translate
 
+
 class BaseCommands:
     """
     Base commands for assistant
@@ -32,10 +33,3 @@ class BaseCommands:
     @translate
     def translate(self, text: str):
         return text
-
-
-if __name__ == '__main__':
-    base_command = BaseCommands('fr')
-    print(base_command.coin())
-    print(base_command.joke())
-    print(base_command.translate('Привет'))
