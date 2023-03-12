@@ -23,6 +23,8 @@ class Engine:
             self.modules.append(module())
 
     def process_middlewares(self, request):
+        request.middlewares = self.middlewares
+        request.modules = self.modules
         for middleware in self.middlewares:
             Engine.process_middleware(request, middleware)
         return request

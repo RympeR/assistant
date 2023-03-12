@@ -10,12 +10,17 @@ class RequestOBJ:
     language: Union[str, None] = None
     args: Union[List[str], None] = None
     kwargs: Union[dict, None] = None
+    middlewares: Union[list, None] = None
+    modules: Union[list, None] = None
 
     def __init__(self, commands: Union[List[CommandOBJ], None] = None, language: Union[str, None] = None,
+                 middlewares: Union[list, None] = None, modules: Union[list, None] = None,
                  *args: Union[List[str], None], **kwargs: Union[dict, None]):
         self.commands = commands
         self.args = args
         self.kwargs = kwargs
+        self.middlewares = middlewares
+        self.modules = modules
         set_language(language)
 
     def __str__(self):
